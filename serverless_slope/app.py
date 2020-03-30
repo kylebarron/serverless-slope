@@ -20,13 +20,9 @@ app = API(name="serverless-slope")
     cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
-    tag=["tiles"],
-    **kwargs)
-def _img(
-        z: int = None,
-        x: int = None,
-        y: int = None,
-) -> Tuple[str, str, BinaryIO]:
+    tag=["tiles"])
+def _img(z: int = None, x: int = None, y: int = None,
+         **kwargs) -> Tuple[str, str, BinaryIO]:
     """Handle tile requests."""
     key = f'normal/{z}/{x}/{y}.png'
     obj = s3_client.get_object(Bucket='elevation-tiles-prod', Key=key)
@@ -45,13 +41,9 @@ def _img(
     cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
-    tag=["tiles"],
-    **kwargs)
-def _img(
-        z: int = None,
-        x: int = None,
-        y: int = None,
-) -> Tuple[str, str, BinaryIO]:
+    tag=["tiles"])
+def _img(z: int = None, x: int = None, y: int = None,
+         **kwargs) -> Tuple[str, str, BinaryIO]:
     """Handle tile requests."""
     key = f'normal/{z}/{x}/{y}.png'
     obj = s3_client.get_object(Bucket='elevation-tiles-prod', Key=key)
