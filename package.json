@@ -1,0 +1,19 @@
+{
+  "name": "serverless-slope",
+  "version": "0.1.0",
+  "description": "Serverless, worldwide slope angle shading tiles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylebarron/serverless-slope.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kylebarron/serverless-slope/issues"
+  },
+  "homepage": "https://github.com/kylebarron/serverless-slope#readme"
+}
