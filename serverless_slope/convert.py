@@ -109,7 +109,7 @@ def below_sea_level_mask(arr: np.array) -> np.array:
     ele = vfunc(arr)
 
     # Create mask
-    return ele >= 0
+    return ele < 0
 
 
 def apply_colormap(slope, mask, bins, colormap):
