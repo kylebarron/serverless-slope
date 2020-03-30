@@ -1,3 +1,4 @@
+import math
 from io import BytesIO
 
 import numpy as np
@@ -9,6 +10,32 @@ COLORMAP = [[255, 255, 255, 0], [248, 253, 85, 255], [241, 184, 64, 255],
             [0, 38, 245, 255], [0, 0, 0, 255]]
 
 
+# https://github.com/tilezen/joerd/blob/0b86765156d0612d837548c2cf70376c43b3405c/joerd/output/normal.py#L26-L41
+def _generate_mapping_table():
+    table = []
+    for i in range(0, 11):
+        table.append(-11000 + i * 1000)
+    table.append(-100)
+    table.append(-50)
+    table.append(-20)
+    table.append(-10)
+    table.append(-1)
+    for i in range(0, 150):
+        table.append(20 * i)
+    for i in range(0, 60):
+        table.append(3000 + 50 * i)
+    for i in range(0, 29):
+        table.append(6000 + 100 * i)
+    return table
+
+
+# Make a constant version of the table for reference.
+HEIGHT_TABLE = _generate_mapping_table()
+
+
+def get_elevation(h: int):
+    return HEIGHT_TABLE[255 - h]
+
 
 def normals_to_colormap(buf: bytes, bins=BINS, colormap=COLORMAP) -> bytes:
     """Convert png of normals to png of colormap
@@ -19,17 +46,24 @@ def normals_to_colormap(buf: bytes, bins=BINS, colormap=COLORMAP) -> bytes:
     Returns:
         - png buffer of created image
     """
-
+    # Load png image to array
     arr = imread(buf)
 
     # Get slope data
     slope = get_slope(arr)
 
-    # Apply colormap and convert to rgba
-    rgba = apply_colormap(slope, bins=bins, colormap=colormap)
+    # Get mask of areas below 0 elevation
+    mask = below_sea_level_mask(arr[:, :, 3])
 
+    # Apply colormap and convert to rgba
+    rgba = apply_colormap(slope, mask, bins=bins, colormap=colormap)
+
+    # Apply mask on colormap
+    rgba_masked = apply_mask(rgba, colormap)
+
+    # Create buffer and fill with image
     new_buf = BytesIO()
-    imwrite(new_buf, rgba, format='png-pil', optimize=True)
+    imwrite(new_buf, rgba_masked, format='png-pil', optimize=True)
 
     new_buf.seek(0)
     return new_buf.read()
@@ -59,7 +93,26 @@ def get_slope(arr: np.array) -> np.array:
     return np.arccos(unscaled_z) * 180 / math.pi
 
 
-def apply_colormap(slope, bins, colormap):
+def below_sea_level_mask(arr: np.array) -> np.array:
+    """Create mask of pixels below sea level
+
+    Args:
+        - arr: array (256, 256) of quantized elevation values
+
+    Returns:
+        np.array (256, 256). True means <0 elevation
+    """
+    # Vectorize function
+    vfunc = np.vectorize(get_elevation)
+
+    # Find quantized elevations
+    ele = vfunc(arr)
+
+    # Create mask
+    return ele >= 0
+
+
+def apply_colormap(slope, mask, bins, colormap):
     # Bin data
     inds = np.digitize(slope, bins)
 
@@ -67,6 +120,11 @@ def apply_colormap(slope, bins, colormap):
     split = [dict(enumerate(map(lambda x: x[i], colormap))) for i in range(4)]
     arrs = []
     for split_map in split:
-        arrs.append(np.vectorize(split_map.get)(inds))
+        channel = np.vectorize(split_map.get)(inds)
+
+        # Where the mask is True, set to 0
+        # This includes all elevations <0
+        np.putmask(channel, mask, 0)
+        arrs.append(channel)
 
     return np.dstack(arrs)
