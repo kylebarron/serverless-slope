@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/serverless-slope/precache-manifest.df17e0cd5f44a9692157652397cb23da.js"
+  "/serverless-slope/precache-manifest.ee610beee53e9265b78c2e972e8135a7.js"
 );
 
 self.addEventListener('message', (event) => {
