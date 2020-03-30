@@ -9,16 +9,24 @@ COLORMAP = [[255, 255, 255, 0], [248, 253, 85, 255], [241, 184, 64, 255],
             [0, 38, 245, 255], [0, 0, 0, 255]]
 
 
-def main():
-    # load data
-    with open('1606.png', 'rb') as f:
-        buf = f.read()
+
+def normals_to_colormap(buf: bytes, bins=BINS, colormap=COLORMAP) -> bytes:
+    """Convert png of normals to png of colormap
+
+    Args:
+        - buf: png buffer
+
+    Returns:
+        - png buffer of created image
+    """
+
+    arr = imread(buf)
 
     # Get slope data
-    slope = get_slope(buf)
+    slope = get_slope(arr)
 
     # Apply colormap and convert to rgba
-    rgba = apply_colormap(slope, bins=BINS, colormap=COLORMAP)
+    rgba = apply_colormap(slope, bins=bins, colormap=colormap)
 
     new_buf = BytesIO()
     imwrite(new_buf, rgba, format='png-pil', optimize=True)
@@ -27,13 +35,13 @@ def main():
     return new_buf.read()
 
 
-def get_slope(buf):
-    arr = imread(buf)
-
+def get_slope(arr: np.array) -> np.array:
+    """Compute slope array from 4d array of normals
+    """
     # https://github.com/tilezen/joerd/blob/0b86765156d0612d837548c2cf70376c43b3405c/joerd/output/normal.py#L176-L179
     # Note that because of rounding necessary to encode as 8-bit ints, the
     # unscaled vector lengths don't add up exactly to 1
-    unscaled = (arr / 128) - 1
+    unscaled_z = (arr[:, :, 2] / 128) - 1
 
     # To find the slope, you want the angle between the normal vector and a
     # vector straight up from a horizontal surface. Such a straight up vector is
@@ -48,7 +56,7 @@ def get_slope(buf):
     #
     # Finally, this angle is in radians, so convert to degrees
     # https://stackoverflow.com/a/16669463
-    return np.arccos(unscaled[:, :, 2]) * 180 / math.pi
+    return np.arccos(unscaled_z) * 180 / math.pi
 
 
 def apply_colormap(slope, bins, colormap):
