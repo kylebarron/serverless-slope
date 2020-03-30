@@ -18,6 +18,26 @@ export default function Map() {
       mapOptions={{ hash: true }}
     >
       <Source
+        id="hillshade"
+        minzoom={0}
+        maxzoom={15}
+        type="raster"
+        tileSize={256}
+        tiles={[
+          "https://8c51ijx3g1.execute-api.us-east-1.amazonaws.com/production/hillshade/{z}/{x}/{y}.png"
+        ]}
+      >
+        <Layer
+          id="hillshade-layer"
+          type="raster"
+          beforeId="building"
+          paint={{
+            "raster-opacity": 0.6
+          }}
+        />
+      </Source>
+
+      <Source
         id="slope-angle-shading"
         minzoom={0}
         maxzoom={15}
