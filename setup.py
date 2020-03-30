@@ -7,7 +7,7 @@ with open('README.md') as f:
     readme = f.read()
 
 # Runtime requirements.
-inst_reqs = ["lambda-proxy>=5.1.0", "imageio"]
+inst_reqs = ["lambda-proxy>=5.1.0", "imageio", "numpy", "boto3"]
 setup_requirements = ['setuptools >= 38.6.0', 'twine >= 1.11.0']
 
 # yapf: disable
