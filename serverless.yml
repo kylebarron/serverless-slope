@@ -31,7 +31,7 @@ package:
 functions:
   app:
     handler: serverless_slope.app.app
-    memorySize: 1024
+    memorySize: 192
     timeout: 2
     environment:
       CACHE_CONTROL: TEST
