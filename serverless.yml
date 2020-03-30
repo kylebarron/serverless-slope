@@ -1,0 +1,43 @@
+service: serverless-slope
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${opt:stage, 'production'}
+  region: ${opt:region, 'us-east-1'}
+  deploymentBucket: ${opt:bucket}
+
+  iamRoleStatements:
+  -  Effect: "Allow"
+     Action:
+       - "*"
+     Resource:
+       - arn:aws:s3:::${opt:bucket}*
+
+  -  Effect: "Allow"
+     Action:
+       - "s3:*"
+     Resource:
+       - "arn:aws:s3:::elevation-tiles-prod*"
+
+  apiGateway:
+    binaryMediaTypes:
+      - '*/*'
+    minimumCompressionSize: 1
+
+package:
+  artifact: package.zip
+
+functions:
+  app:
+    handler: serverless_slope.app.app
+    memorySize: 1024
+    timeout: 2
+    environment:
+      CACHE_CONTROL: TEST
+
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true
