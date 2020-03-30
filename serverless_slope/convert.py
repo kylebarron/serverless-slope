@@ -34,6 +34,9 @@ HEIGHT_TABLE = _generate_mapping_table()
 
 
 def get_elevation(h: int):
+    if h == 255:
+        h -= 1
+
     return HEIGHT_TABLE[255 - h]
 
 
