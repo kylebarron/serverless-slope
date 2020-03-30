@@ -3,13 +3,17 @@
 Serverless, worldwide slope angle shading tiles generated from [AWS Terrain
 Tiles](https://registry.opendata.aws/terrain-tiles/).
 
+**NOTE**: I think I currently have some z-scaling issues, because the generated
+tiles indicate lesser slopes than [another project](https://nst.guide) (turn on
+slope-angle shading) which uses precomputed tiles from `gdaldem`.
+
 ## Motivation
 
 One of the many great AWS Open Data datasets is [terrain
 tiles](https://registry.opendata.aws/terrain-tiles/). These are a collection of
 worldwide elevation products stored on AWS S3 for anyone to use. This project
 shows how easy, fast, and cheap it is to leverage AWS Open Data for hobby
-projects. 
+projects.
 
 Slope-angle shading is a great overlay for many types of outdoor planning. The
 darker the colors, the steeper the slope, the more you need to make sure you're

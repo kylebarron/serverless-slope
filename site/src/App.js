@@ -5,9 +5,9 @@ export default function Map() {
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
-    latitude: 37.73332,
-    longitude: -119.59423,
-    zoom: 13
+    latitude: 36.1284,
+    longitude: -112.1861,
+    zoom: 12
   });
 
   return (
