@@ -1,5 +1,3 @@
-"""cogeo_mosaic_tiler.handlers.app: handle request for cogeo-mosaic-tiler endpoints."""
-
 from typing import BinaryIO, Tuple
 
 from boto3.session import Session as boto3_session
