@@ -58,12 +58,9 @@ def normals_to_colormap(buf: bytes, bins=BINS, colormap=COLORMAP) -> bytes:
     # Apply colormap and convert to rgba
     rgba = apply_colormap(slope, mask, bins=bins, colormap=colormap)
 
-    # Apply mask on colormap
-    rgba_masked = apply_mask(rgba, colormap)
-
     # Create buffer and fill with image
     new_buf = BytesIO()
-    imwrite(new_buf, rgba_masked, format='png-pil', optimize=True)
+    imwrite(new_buf, rgba.astype('uint8'), format='png-pil', optimize=True)
 
     new_buf.seek(0)
     return new_buf.read()
