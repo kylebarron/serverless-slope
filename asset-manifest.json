@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/serverless-slope/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/serverless-slope/static/js/main.747a8f8b.chunk.js",
-    "main.js.map": "/serverless-slope/static/js/main.747a8f8b.chunk.js.map",
+    "main.js": "/serverless-slope/static/js/main.2730fcbb.chunk.js",
+    "main.js.map": "/serverless-slope/static/js/main.2730fcbb.chunk.js.map",
     "runtime-main.js": "/serverless-slope/static/js/runtime-main.e4252308.js",
     "runtime-main.js.map": "/serverless-slope/static/js/runtime-main.e4252308.js.map",
-    "static/js/2.e4046d44.chunk.js": "/serverless-slope/static/js/2.e4046d44.chunk.js",
-    "static/js/2.e4046d44.chunk.js.map": "/serverless-slope/static/js/2.e4046d44.chunk.js.map",
+    "static/js/2.69a9c218.chunk.js": "/serverless-slope/static/js/2.69a9c218.chunk.js",
+    "static/js/2.69a9c218.chunk.js.map": "/serverless-slope/static/js/2.69a9c218.chunk.js.map",
     "index.html": "/serverless-slope/index.html",
-    "precache-manifest.ee610beee53e9265b78c2e972e8135a7.js": "/serverless-slope/precache-manifest.ee610beee53e9265b78c2e972e8135a7.js",
+    "precache-manifest.49e15a10effc0aeb6b8c64179d9edbf4.js": "/serverless-slope/precache-manifest.49e15a10effc0aeb6b8c64179d9edbf4.js",
     "service-worker.js": "/serverless-slope/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/serverless-slope/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.e4046d44.chunk.js.LICENSE.txt": "/serverless-slope/static/js/2.e4046d44.chunk.js.LICENSE.txt"
+    "static/js/2.69a9c218.chunk.js.LICENSE.txt": "/serverless-slope/static/js/2.69a9c218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e4252308.js",
-    "static/js/2.e4046d44.chunk.js",
+    "static/js/2.69a9c218.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.747a8f8b.chunk.js"
+    "static/js/main.2730fcbb.chunk.js"
   ]
 }
