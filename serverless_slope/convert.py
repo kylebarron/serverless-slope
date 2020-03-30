@@ -1,8 +1,6 @@
 import math
-from io import BytesIO
 
 import numpy as np
-from imageio import imread, imwrite
 
 BINS = [26.5, 29.5, 31.5, 34.5, 45.5, 50.5, 59.5]
 COLORMAP = [[255, 255, 255, 0], [248, 253, 85, 255], [241, 184, 64, 255],
@@ -40,33 +38,24 @@ def get_elevation(h: int):
     return HEIGHT_TABLE[255 - h]
 
 
-def normals_to_colormap(buf: bytes, bins=BINS, colormap=COLORMAP) -> bytes:
+def normals_to_colormap(
+        normals: np.ndarray, bins=BINS, colormap=COLORMAP) -> bytes:
     """Convert png of normals to png of colormap
 
     Args:
-        - buf: png buffer
+        - normals: 256x256x4 array of normals
 
     Returns:
-        - png buffer of created image
+        - rgba pixels in 256x256x4 ndarray
     """
-    # Load png image to array
-    arr = imread(buf)
-
     # Get slope data
-    slope = get_slope(arr)
+    slope = get_slope(normals)
 
     # Get mask of areas below 0 elevation
-    mask = below_sea_level_mask(arr[:, :, 3])
+    mask = below_sea_level_mask(normals[:, :, 3])
 
     # Apply colormap and convert to rgba
-    rgba = apply_colormap(slope, mask, bins=bins, colormap=colormap)
-
-    # Create buffer and fill with image
-    new_buf = BytesIO()
-    imwrite(new_buf, rgba.astype('uint8'), format='png-pil', optimize=True)
-
-    new_buf.seek(0)
-    return new_buf.read()
+    return apply_colormap(slope, mask, bins=bins, colormap=colormap)
 
 
 def get_slope(arr: np.array) -> np.array:
@@ -90,7 +79,8 @@ def get_slope(arr: np.array) -> np.array:
     #
     # Finally, this angle is in radians, so convert to degrees
     # https://stackoverflow.com/a/16669463
-    return np.arccos(unscaled_z) * 180 / math.pi
+    return np.degrees(np.arccos(unscaled_z))
+    np.arccosh
 
 
 def below_sea_level_mask(arr: np.array) -> np.array:
