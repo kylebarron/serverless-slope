@@ -1,9 +1,10 @@
+import os
 from typing import BinaryIO, Tuple
 
 from boto3.session import Session as boto3_session
 from imageio import imread
-from lambda_proxy.proxy import API
 
+from lambda_proxy.proxy import API
 from serverless_slope.convert import normals_to_colormap
 from serverless_slope.hillshade import hillshade
 from serverless_slope.util import array_to_image
@@ -20,6 +21,7 @@ app = API(name="serverless-slope")
     cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
+    cache_control = os.getenv('CACHE_CONTROL'),
     tag=["tiles"])
 def _img(z: int = None, x: int = None, y: int = None,
          **kwargs) -> Tuple[str, str, BinaryIO]:
@@ -41,6 +43,7 @@ def _img(z: int = None, x: int = None, y: int = None,
     cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
+    cache_control = os.getenv('CACHE_CONTROL'),
     tag=["tiles"])
 def _img(z: int = None, x: int = None, y: int = None,
          **kwargs) -> Tuple[str, str, BinaryIO]:

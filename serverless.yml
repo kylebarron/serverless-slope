@@ -2,7 +2,7 @@ service: serverless-slope
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.7
   stage: ${opt:stage, 'production'}
   region: ${opt:region, 'us-east-1'}
   deploymentBucket: ${opt:bucket}
@@ -34,10 +34,10 @@ functions:
     memorySize: 192
     timeout: 10
     environment:
-      CACHE_CONTROL: TEST
+      CACHE_CONTROL: ${opt:cache-control, 'public,max-age=3600'}
 
     events:
-      - http:
+      - httpApi:
           path: /{proxy+}
-          method: any
+          method: '*'
           cors: true
