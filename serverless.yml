@@ -2,7 +2,7 @@ service: serverless-slope
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.8
   stage: ${opt:stage, 'production'}
   region: ${opt:region, 'us-east-1'}
   deploymentBucket: ${opt:bucket}
