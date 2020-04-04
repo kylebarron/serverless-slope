@@ -24,7 +24,7 @@ export default function Map() {
         type="raster"
         tileSize={256}
         tiles={[
-          "https://8c51ijx3g1.execute-api.us-east-1.amazonaws.com/production/hillshade/{z}/{x}/{y}.png"
+          "https://qzhdshrb52.execute-api.us-east-1.amazonaws.com/hillshade/{z}/{x}/{y}.png"
         ]}
       >
         <Layer
@@ -44,7 +44,7 @@ export default function Map() {
         type="raster"
         tileSize={256}
         tiles={[
-          "https://8c51ijx3g1.execute-api.us-east-1.amazonaws.com/production/slope/{z}/{x}/{y}.png"
+          "https://qzhdshrb52.execute-api.us-east-1.amazonaws.com/slope/{z}/{x}/{y}.png"
         ]}
       >
         <Layer

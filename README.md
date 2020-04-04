@@ -32,7 +32,7 @@ git clone https://github.com/kylebarron/serverless-slope
 cd serverless-slope
 make package
 npm i -g serverless
-sls deploy --bucket bucket-where-you-store-data
+sls deploy --bucket bucket-where-you-store-data --cache-control "public,max-age=4000"
 ```
 
 ## Pricing
