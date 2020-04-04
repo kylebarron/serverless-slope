@@ -37,14 +37,20 @@ sls deploy --bucket bucket-where-you-store-data --cache-control "public,max-age=
 
 ## Pricing
 
+Roughly ~$5.70 per 1M requests. Note this is for requests _that reach Lambda_.
+By using Cloudflare and an appropriate cache control header, this could be
+substantially reduced.
+
+Lambda:
+
 - $0.20 per 1M requests
-- $0.0000166667 GB-second / * 192 / 1024 * .9 * 1M = $2.81
+- Set to 192MB and if each invocation takes .9s, per 1M requests:
+
+    $0.0000166667 GB-second / * 192 / 1024 * .9 * 1M = $2.81
 
 API Gateway:
 
-Currently this uses the REST API instead of the HTTP API,
-
-- $3.50 per 1M requests
+- $1.00 per 1M requests
 
 Data Transfer:
 
@@ -53,7 +59,6 @@ Data Transfer:
 ### Ways to lower prices:
 
 - Use Cloudflare to cache images with a long cache control header
-- Use HTTP API instead of the REST API to save $2.50/1M requests. The HTTP API isn't currently supported by the underlying `lambda-proxy` package.
 
 ### Hosted comparison
 
