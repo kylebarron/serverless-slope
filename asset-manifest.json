@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/serverless-slope/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/serverless-slope/static/js/main.4c4f280d.chunk.js",
-    "main.js.map": "/serverless-slope/static/js/main.4c4f280d.chunk.js.map",
+    "main.js": "/serverless-slope/static/js/main.46b49c71.chunk.js",
+    "main.js.map": "/serverless-slope/static/js/main.46b49c71.chunk.js.map",
     "runtime-main.js": "/serverless-slope/static/js/runtime-main.e4252308.js",
     "runtime-main.js.map": "/serverless-slope/static/js/runtime-main.e4252308.js.map",
     "static/js/2.69a9c218.chunk.js": "/serverless-slope/static/js/2.69a9c218.chunk.js",
     "static/js/2.69a9c218.chunk.js.map": "/serverless-slope/static/js/2.69a9c218.chunk.js.map",
     "index.html": "/serverless-slope/index.html",
-    "precache-manifest.5aa203fb0716b580cd70ff112fd27167.js": "/serverless-slope/precache-manifest.5aa203fb0716b580cd70ff112fd27167.js",
+    "precache-manifest.1c7e04312f48126ce89f4d755a1ee898.js": "/serverless-slope/precache-manifest.1c7e04312f48126ce89f4d755a1ee898.js",
     "service-worker.js": "/serverless-slope/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/serverless-slope/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.69a9c218.chunk.js.LICENSE.txt": "/serverless-slope/static/js/2.69a9c218.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.e4252308.js",
     "static/js/2.69a9c218.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.4c4f280d.chunk.js"
+    "static/js/main.46b49c71.chunk.js"
   ]
 }
