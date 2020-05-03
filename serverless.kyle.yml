@@ -9,6 +9,7 @@ provider:
   httpApi:
     cors:
       allowedOrigins:
+        - http://localhost
         - https://all-transit.com
         - https://kylebarron.dev
         - https://kylebarron.github.io
@@ -17,7 +18,7 @@ provider:
         - https://nst.guide
         - https://nstguide.com
         - https://sentine2.earth
-        - http://localhost
+        - https://trails3d.com
       allowedHeaders:
         - Authorization
         - Content-Type
