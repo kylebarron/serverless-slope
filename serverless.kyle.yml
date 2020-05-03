@@ -7,7 +7,29 @@ provider:
   region: ${opt:region, 'us-east-1'}
   deploymentBucket: ${opt:bucket}
   httpApi:
-    cors: true
+    cors:
+      allowedOrigins:
+        - https://all-transit.com
+        - https://kylebarron.dev
+        - https://kylebarron.github.io
+        - https://landsat3d.com
+        - https://landsat8.earth
+        - https://nst.guide
+        - https://nstguide.com
+        - https://sentine2.earth
+        - http://localhost
+      allowedHeaders:
+        - Authorization
+        - Content-Type
+        - X-Amz-Date
+        - X-Amz-Security-Token
+        - X-Amz-User-Agent
+        - X-Api-Key
+      allowedMethods:
+        - GET
+        - OPTIONS
+      allowCredentials: true
+      maxAge: 6000 # In seconds
 
   iamRoleStatements:
   -  Effect: "Allow"

@@ -18,7 +18,6 @@ app = API(name="serverless-slope")
 @app.route(
     "/slope/<int:z>/<int:x>/<int:y>.png",
     methods=["GET"],
-    cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
     cache_control = os.getenv('CACHE_CONTROL'),
@@ -40,7 +39,6 @@ def _img(z: int = None, x: int = None, y: int = None,
 @app.route(
     "/hillshade/<int:z>/<int:x>/<int:y>.png",
     methods=["GET"],
-    cors=True,
     payload_compression_method="gzip",
     binary_b64encode=True,
     cache_control = os.getenv('CACHE_CONTROL'),
